@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class Search extends Component {
   state = {
     text: ''
+  };
+
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value }); // We can just use "text: e.target.value" but using [e.target.name] instead can be useful if we have several inputs (name, email...) so we don't have to create multiple onChange functions
