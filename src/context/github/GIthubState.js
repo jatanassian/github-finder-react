@@ -21,6 +21,27 @@ const GithubState = props => {
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
   // Search Users
+  const searchUsers = async text => {
+    setLoading();
+
+    // This, using OAuth credentials in query parameters has been deprecated so it won't work in the future. The way below should work
+    // const res = await axios.get(
+    //   `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    // );
+
+    const res = await axios({
+      baseURL: 'https://api.github.com/search/users',
+      auth: {
+        client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+        client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET
+      },
+      params: {
+        q: text
+      }
+    });
+
+    dispatch({ type: SEARCH_USERS, data: res.data.items });
+  };
 
   // Get User
 
@@ -29,6 +50,7 @@ const GithubState = props => {
   // Clear Users
 
   // Set Loading
+  const setLoading = () => dispatch({ type: SET_LOADING });
 
   // We're wrapping the entire app with the provider that contains the state so that the state is available to the entire app, there's no need to pass the state as props
   return (
@@ -37,7 +59,8 @@ const GithubState = props => {
         users: state.users,
         user: state.user,
         repos: state.repos,
-        loading: state.loading
+        loading: state.loading,
+        searchUsers
       }}
     >
       {props.children}

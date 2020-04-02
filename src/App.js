@@ -19,30 +19,6 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
-  // Search Github users
-  const searchUsers = async text => {
-    setLoading(true);
-
-    // This, using OAuth credentials in query parameters has been deprecated so it won't work in the future. The way below should work
-    // const res = await axios.get(
-    //   `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    // );
-
-    const res = await axios({
-      baseURL: 'https://api.github.com/search/users',
-      auth: {
-        client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-        client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET
-      },
-      params: {
-        q: text
-      }
-    });
-
-    setUsers(res.data.items);
-    setLoading(false);
-  };
-
   // Get single Github user
   const getUser = async username => {
     setLoading(true);
@@ -106,7 +82,6 @@ const App = () => {
                 render={props => (
                   <Fragment>
                     <Search
-                      searchUsers={searchUsers}
                       clearUsers={clearUsers}
                       showClear={users.length > 0 ? true : false}
                       setAlert={showAlert}
