@@ -26,6 +26,12 @@ export default (state, action) => {
         user: action.data,
         loading: false
       };
+    case GET_REPOS:
+      return {
+        ...state,
+        repos: action.data,
+        loading: false
+      };
     case SET_LOADING:
       return {
         ...state,
