@@ -5,8 +5,8 @@ React app to search Github profiles. This app uses the Context API along with th
 
 ## Screenshots
 
-![Search results](https://github.com/jatanassian/github-finder-react/blob/master/images/screenshot1.png?raw=true)
-![Profile page](https://github.com/jatanassian/github-finder-react/blob/master/images/screenshot2.png?raw=true)
+![Search results](https://github.com/jatanassian/github-finder-react/blob/master/src/images/screenshot1.png?raw=true)
+![Profile page](https://github.com/jatanassian/github-finder-react/blob/master/src/images/screenshot2.png?raw=true)
 
 ## If you want to run this project locally
 
